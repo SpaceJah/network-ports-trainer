@@ -14,6 +14,27 @@ class Program
             return;
         }
 
+        // Intro text
+        Console.WriteLine("=== Ports & Protocols Drill ===\n");
+        Console.WriteLine("This program helps you memorize ports, protocols, and related info.");
+        Console.WriteLine();
+        Console.WriteLine("How it works:");
+        Console.WriteLine("1. Choose which column you want to be shown (the QUESTION).");
+        Console.WriteLine("2. Choose which column you want to recall (the ANSWER).");
+        Console.WriteLine("3. The drill will keep asking until you get every item correct.");
+        Console.WriteLine();
+        Console.WriteLine("Column meanings:");
+        Console.WriteLine(" - Protocol: The short identifier (e.g. SSH, FTP, DNS).");
+        Console.WriteLine(" - Port: The network port(s), including protocol (e.g. tcp/22, udp/67, udp/68).");
+        Console.WriteLine(" - Name: The full service name (e.g. Secure Shell, File Transfer Protocol).");
+        Console.WriteLine(" - Description: What the service does (e.g. \"Encrypted console access\").");
+        Console.WriteLine();
+        Console.WriteLine("Examples:");
+        Console.WriteLine(" - If QUESTION = Protocol (SSH) and ANSWER = Port, type: tcp/22");
+        Console.WriteLine(" - If QUESTION = Name (File Transfer Protocol) and ANSWER = Port, type: tcp/20, tcp/21");
+        Console.WriteLine();
+        Console.WriteLine("Type \"quit\" at any time to exit.\n");
+
         var header = data[0];
         while (true)
         {
@@ -98,10 +119,7 @@ class Program
     static string Normalize(string input)
     {
         if (string.IsNullOrEmpty(input)) return "";
-        return input.Replace("tcp/", "", StringComparison.OrdinalIgnoreCase)
-                    .Replace("udp/", "", StringComparison.OrdinalIgnoreCase)
-                    .Replace(" ", "")
-                    .ToLower();
+        return input.Trim().ToLower();
     }
 
     static List<List<string>> LoadCsv(string path)
